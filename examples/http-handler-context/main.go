@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"errors"
+	"fmt"
 	"math/rand"
 	"net/http"
 	"time"
@@ -76,6 +77,7 @@ func longRunningTask(ctx context.Context) error {
 	case <-time.After(dur):
 		return nil
 	case <-ctx.Done():
+		fmt.Println("task cancelled")
 		return ctx.Err()
 	}
 }
